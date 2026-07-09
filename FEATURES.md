@@ -17,7 +17,7 @@
 
 ## Code Generation
 
-- [x] React component generation
+- [ ] React component generation
 - [ ] React hook generation
 - [ ] React context generation
 - [ ] Storybook story generation

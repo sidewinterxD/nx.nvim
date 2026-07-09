@@ -59,9 +59,13 @@ require("nx").setup({
 
 ## Keymaps
 
-| Keymap        | Description                                    |
-| ------------- | ---------------------------------------------- |
-| `<leader>nxr` | Select and run a command from the root project |
+| Keymap          | Command        | Description                          |
+|-----------------|----------------|--------------------------------------|
+| `<leader>nxr`   | `:NxRunRoot`   | Select command from root project     |
+| `<leader>nxl`   | `:NxRunLocal`  | Select command from current project  |
+| `<leader>nxx`   | `:NxReRun`     | Re-run last command                  |
+| `<leader>nxo`   | `:NxRunOldCmd` | Select from old commands             |
+| `<leader>nxR`   | `:NxReset`     | Reset Nx workspace (`npx nx reset`)  |
 
 ## Health Check
 

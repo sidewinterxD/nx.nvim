@@ -24,22 +24,6 @@ A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands, ge
 
 ## Installation
 
-Using [lazy.nvim](https://github.com/folke/lazy.nvim):
-
-```lua
-return {
-  "https://github.com/sidewinterxD/nx.nvim",
-  dependencies = {
-    "ibhagwan/fzf-lua",
-  },
-  opts = {
-    options = {
-        -- .. options go here
-    }
-  }
-}
-```
-
 Using [vim.pack](https://neovim.io/doc/user/packadd.html) (Neovim >= 0.12):
 
 ```lua

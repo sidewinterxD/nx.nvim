@@ -63,9 +63,9 @@ require("nx").setup({
 |-----------------|----------------|--------------------------------------|
 | `<leader>nxr`   | `:NxRunRoot`   | Select command from root project     |
 | `<leader>nxl`   | `:NxRunLocal`  | Select command from current project  |
-| `<leader>nxx`   | `:NxReRun`     | Re-run last command                  |
-| `<leader>nxo`   | `:NxRunOldCmd` | Select from old commands             |
-| `<leader>nxR`   | `:NxReset`     | Reset Nx workspace (`npx nx reset`)  |
+| `<leader>nxR`   | `:NxReRun`     | Re-run last command                  |
+| `<leader>nxh`   | `:NxRunOldCmd` | Select old command from history      |
+| `<leader>nxW`   | `:NxReset`     | Reset Nx workspace (`npx nx reset`)  |
 
 ## Health Check
 

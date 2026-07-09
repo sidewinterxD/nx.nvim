@@ -33,9 +33,6 @@ function M.setup(opts)
   -- Merge user options with defaults
   M.options = vim.tbl_deep_extend("force", default_options, opts and opts.options or {})
 
-  -- Create user commands
-  require("nx.commands")()
-
   -- Register which-key group if available
   local ok, wk = pcall(require, "which-key")
 

@@ -28,7 +28,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 return {
-  "you/nx.nvim",
+  "https://github.com/sidewinterxD/nx.nvim",
   dependencies = {
     "ibhagwan/fzf-lua",
   },
@@ -44,7 +44,7 @@ Using [vim.pack](https://neovim.io/doc/user/packadd.html) (Neovim >= 0.12):
 
 ```lua
 vim.pack.add({
-  "https://github.com/you/nx.nvim",
+  "https://github.com/sidewinterxD/nx.nvim",
   "https://github.com/ibhagwan/fzf-lua",
 })
 ```

@@ -1,11 +1,11 @@
 # nx.nvim
 
-A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands, generate React components, and manage your workspace without leaving your editor.
+A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands without leaving your editor. 
+A fun little sideproject I made due to working with nx and missing easy command access.
 
 ## Features
 
 - 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
-- ⚛️ React component generation
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
 
@@ -62,7 +62,6 @@ require("nx").setup({
 | Keymap        | Description                                    |
 | ------------- | ---------------------------------------------- |
 | `<leader>nxr` | Select and run a command from the root project |
-| `<leader>nxg` | Generate a React component via `@nx/react`     |
 
 ## Health Check
 

@@ -51,14 +51,17 @@ function M.setup(opts)
 
   -- Keymaps
   local keymaps = {
-    { "<leader>nxr",  "<cmd>NxRunRoot<CR>",       desc = "Select command from root project" },
-    { "<leader>nxR",  "<cmd>NxReRun<CR>",         desc = "Re-run last command" },
-    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",     desc = "Run command for history" },
-    { "<leader>nxl",  "<cmd>NxRunLocal<CR>",      desc = "Select command from current project" },
-    { "<leader>nxW",  "<cmd>NxReset<CR>",         desc = "Nx Reset workspace" },
-    { "<leader>nxgr", "<cmd>NxGenerate<CR>",      desc = "Nx Generate @nx/react" },
-    { "<leader>nxjp", "<cmd>NxjumpProject<CR>",   desc = "Nx Jump to project" },
-    { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>", desc = "Nx Jump to workspace" }
+    { "<leader>nxr",  "<cmd>NxRunRoot<CR>",              desc = "Select command from root project" },
+    { "<leader>nxR",  "<cmd>NxReRun<CR>",                desc = "Re-run last command" },
+    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",            desc = "Run command for history" },
+    { "<leader>nxl",  "<cmd>NxRunLocal<CR>",             desc = "Select command from current project" },
+    { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Nx Reset workspace" },
+    { "<leader>nxgr", "<cmd>NxGenerate<CR>",             desc = "Nx Generate @nx/react" },
+    { "<leader>nxjp", "<cmd>NxjumpProject<CR>",          desc = "Nx Jump to project" },
+    { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>",        desc = "Nx Jump to workspace" },
+    { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Nx Open nx.json" },
+    { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Nx Open local project.json" },
+    { "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Nx Pick project.json" },
 
   }
 

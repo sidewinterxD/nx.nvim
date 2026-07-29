@@ -62,7 +62,6 @@ function M.setup(opts)
     { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Nx Open nx.json" },
     { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Nx Open local project.json" },
     { "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Nx Pick project.json" },
-
   }
 
   for _, km in ipairs(keymaps) do

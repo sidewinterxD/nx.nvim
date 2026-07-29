@@ -55,7 +55,7 @@ pcall(vim.api.nvim_create_user_command, "NxJumpLocalProjectJson", function()
 end, { desc = "Nx Open local project.json" })
 
 pcall(vim.api.nvim_create_user_command, "NxPickJumpProjectJson", function()
-  require("nx.workspace.jump_to_file")
+  require("nx.workspace.jump_to_file")()
 end, { desc = "Nx Pick project.json" })
 
 pcall(vim.api.nvim_create_user_command, 'NxGenerate', function()

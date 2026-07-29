@@ -67,11 +67,11 @@ require("nx").setup({
 | `<leader>nxR`  | `:NxReRun`                | Re-run last command                 |
 | `<leader>nxh`  | `:NxRunOldCmd`            | Select old command from history     |
 | `<leader>nxW`  | `:NxReset`                | Reset Nx workspace (`npx nx reset`) |
-| `<leader>nxjp` | `:NxJumpProject`          | Nx Jump to project                  |
-| `<leader>nxjw` | `:NxJumpWorkspace`        | Nx Jump to workspace                |
-| `<leader>nxjn` | `:NxJumpWorkspaceConfig`  | Nx Open nx.json                     |
-| `<leader>nxjl` | `:NxJumpLocalProjectJson` | Nx Open local project.json          |
-| `<leader>nxjP` | `:NxPickJumpProjectJson`  | Nx Pick project.json                |
+| `<leader>nxjp` | `:NxJumpProject`          | Jump to project                     |
+| `<leader>nxjw` | `:NxJumpWorkspace`        | Jump to workspace                   |
+| `<leader>nxjn` | `:NxJumpWorkspaceConfig`  | Open nx.json                        |
+| `<leader>nxjl` | `:NxJumpLocalProjectJson` | Open local project.json             |
+| `<leader>nxjP` | `:NxPickJumpProjectJson`  | Pick project.json                   |
 
 ## Health Check
 

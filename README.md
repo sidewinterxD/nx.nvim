@@ -83,10 +83,15 @@ After installing, verify your setup by running:
 
 This will report the status of all required and optional dependencies.
 
-## Usage
+## Feature Requests
 
-> Documentation in progress
+Feature requests are welcome.
+If you have an idea, please open an issue and describe your workflow and expected behavior.
 
 ## License
 
 MIT
+
+## Usage
+
+> Documentation in progress

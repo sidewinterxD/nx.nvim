@@ -1,6 +1,6 @@
 # nx.nvim
 
-A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands without leaving your editor. 
+A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands without leaving your editor.
 A fun little sideproject I made due to working with nx and missing easy command access.
 
 ## Features
@@ -8,6 +8,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 - 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
+- 📂 Jump to workspace, project directories, and config files (`nx.json`, `project.json`)
 
 ## Requirements
 
@@ -59,13 +60,18 @@ require("nx").setup({
 
 ## Keymaps
 
-| Keymap          | Command        | Description                          |
-|-----------------|----------------|--------------------------------------|
-| `<leader>nxr`   | `:NxRunRoot`   | Select command from root project     |
-| `<leader>nxl`   | `:NxRunLocal`  | Select command from current project  |
-| `<leader>nxR`   | `:NxReRun`     | Re-run last command                  |
-| `<leader>nxh`   | `:NxRunOldCmd` | Select old command from history      |
-| `<leader>nxW`   | `:NxReset`     | Reset Nx workspace (`npx nx reset`)  |
+| Keymap         | Command                   | Description                         |
+| -------------- | ------------------------- | ----------------------------------- |
+| `<leader>nxr`  | `:NxRunRoot`              | Select command from root project    |
+| `<leader>nxl`  | `:NxRunLocal`             | Select command from current project |
+| `<leader>nxR`  | `:NxReRun`                | Re-run last command                 |
+| `<leader>nxh`  | `:NxRunOldCmd`            | Select old command from history     |
+| `<leader>nxW`  | `:NxReset`                | Reset Nx workspace (`npx nx reset`) |
+| `<leader>nxjp` | `:NxJumpProject`          | Nx Jump to project                  |
+| `<leader>nxjw` | `:NxJumpWorkspace`        | Nx Jump to workspace                |
+| `<leader>nxjn` | `:NxJumpWorkspaceConfig`  | Nx Open nx.json                     |
+| `<leader>nxjl` | `:NxJumpLocalProjectJson` | Nx Open local project.json          |
+| `<leader>nxjP` | `:NxPickJumpProjectJson`  | Nx Pick project.json                |
 
 ## Health Check
 

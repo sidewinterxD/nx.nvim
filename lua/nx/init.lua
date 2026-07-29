@@ -57,7 +57,7 @@ function M.setup(opts)
     { "<leader>nxl",  "<cmd>NxRunLocal<CR>",             desc = "Select command from current project" },
     { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Nx Reset workspace" },
     { "<leader>nxgr", "<cmd>NxGenerate<CR>",             desc = "Nx Generate @nx/react" },
-    { "<leader>nxjp", "<cmd>NxjumpProject<CR>",          desc = "Nx Jump to project" },
+    { "<leader>nxjp", "<cmd>NxJumpProject<CR>",          desc = "Nx Jump to project" },
     { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>",        desc = "Nx Jump to workspace" },
     { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Nx Open nx.json" },
     { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Nx Open local project.json" },

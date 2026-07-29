@@ -34,7 +34,7 @@ return function(opts)
 
   return popup({
     items = labels,
-    prompt = "Select NX Project or Workspace> ",
+    prompt = "Select NX Project> ",
     actions = {
       ["default"] = function(selected)
         local item = selected[1] and lookup[selected[1]]

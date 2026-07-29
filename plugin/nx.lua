@@ -38,7 +38,7 @@ pcall(vim.api.nvim_create_user_command, 'NxReset', function()
   vim.notify("Workspace reset", vim.log.levels.INFO)
 end, { desc = 'Nx Reset workspace' })
 
-pcall(vim.api.nvim_create_user_command, 'NxjumpProject', function()
+pcall(vim.api.nvim_create_user_command, 'NxJumpProject', function()
   require('nx.workspace')()
 end, { desc = 'Nx Jump to project' })
 

@@ -44,18 +44,22 @@ function M.setup(opts)
   if ok and wk.add then
     wk.add({
       { "<leader>nx",  group = "Nx" },
-      { "<leader>nxg", group = "Nx Generate" }
+      { "<leader>nxg", group = "Nx Generate" },
+      { "<leader>nxj", group = "Nx Jump" }
     })
   end
 
   -- Keymaps
   local keymaps = {
-    { "<leader>nxr",  "<cmd>NxRunRoot<CR>",   desc = "Select command from root project" },
-    { "<leader>nxR",  "<cmd>NxReRun<CR>",     desc = "Re-run last command" },
-    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>", desc = "Run command for history" },
-    { "<leader>nxl",  "<cmd>NxRunLocal<CR>",  desc = "Select command from current project" },
-    { "<leader>nxW",  "<cmd>NxReset<CR>",     desc = "Nx Reset workspace" },
-    { "<leader>nxgr", "<cmd>NxGenerate<CR>",  desc = "Nx Generate @nx/react" },
+    { "<leader>nxr",  "<cmd>NxRunRoot<CR>",       desc = "Select command from root project" },
+    { "<leader>nxR",  "<cmd>NxReRun<CR>",         desc = "Re-run last command" },
+    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",     desc = "Run command for history" },
+    { "<leader>nxl",  "<cmd>NxRunLocal<CR>",      desc = "Select command from current project" },
+    { "<leader>nxW",  "<cmd>NxReset<CR>",         desc = "Nx Reset workspace" },
+    { "<leader>nxgr", "<cmd>NxGenerate<CR>",      desc = "Nx Generate @nx/react" },
+    { "<leader>nxjp", "<cmd>NxjumpProject<CR>",   desc = "Nx Jump to project" },
+    { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>", desc = "Nx Jump to workspace" }
+
   }
 
   for _, km in ipairs(keymaps) do

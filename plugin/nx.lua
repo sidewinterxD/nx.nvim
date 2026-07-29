@@ -38,6 +38,26 @@ pcall(vim.api.nvim_create_user_command, 'NxReset', function()
   vim.notify("Workspace reset", vim.log.levels.INFO)
 end, { desc = 'Nx Reset workspace' })
 
+pcall(vim.api.nvim_create_user_command, 'NxJumpProject', function()
+  require('nx.workspace')()
+end, { desc = 'Nx Jump to project' })
+
+pcall(vim.api.nvim_create_user_command, 'NxJumpWorkspace', function()
+  require('nx.workspace')({ root = true })
+end, { desc = 'Nx Jump to Workspace' })
+
+pcall(vim.api.nvim_create_user_command, "NxJumpWorkspaceConfig", function()
+  require("nx.workspace.jump_to_file")({ root = true })
+end, { desc = "Nx Open nx.json" })
+
+pcall(vim.api.nvim_create_user_command, "NxJumpLocalProjectJson", function()
+  require("nx.workspace.jump_to_file")({ current = true })
+end, { desc = "Nx Open local project.json" })
+
+pcall(vim.api.nvim_create_user_command, "NxPickJumpProjectJson", function()
+  require("nx.workspace.jump_to_file")()
+end, { desc = "Nx Pick project.json" })
+
 pcall(vim.api.nvim_create_user_command, 'NxGenerate', function()
   require('nx.generate')()
 end, { desc = 'Nx Generate @nx/react' })

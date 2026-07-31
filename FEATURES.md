@@ -25,10 +25,11 @@
 
 ## Project Navigation
 
-- [ ] Fuzzy-find and jump to project root
-- [ ] Jump to `project.json` for current project
-- [ ] Jump to test file for current buffer
-- [ ] Toggle between source and test file
+- [x] Fuzzy-find and jump to project root
+- [x] Jump to Workspace root
+- [x] fuzzy-find and jump to `project.json` 
+- [x] Jump to `project.json` for current project
+- [x] Jump to workspace config (nx.json)  
 
 ## Workspace Utilities
 

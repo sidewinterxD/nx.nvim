@@ -4,13 +4,15 @@ local read_json = require("nx.utils.read_json")
 local scan_for_project_json = require("nx.utils.scan_for_project_json")
 
 local popup = require("nx.popup.fzf_lua_popup")
+local sep = package.config:sub(1, 1)
+local sep_pattern = sep:gsub("(%W)", "%%%1")
 
 return function(opts)
   local options = opts or {}
   local workspace_root = find_workspace_root()
 
   if options.root == true then
-    local nx_json = workspace_root .. "/nx.json"
+    local nx_json = workspace_root .. sep .. "nx.json"
     if vim.fn.filereadable(nx_json) == 1 then
       vim.cmd.edit(vim.fn.fnameescape(nx_json))
     else
@@ -21,7 +23,7 @@ return function(opts)
 
   if options.current == true then
     local project_root = find_project_root(vim.api.nvim_buf_get_name(0))
-    local project_json = project_root .. "/project.json"
+    local project_json = project_root .. sep .. "project.json"
     if vim.fn.filereadable(project_json) == 1 then
       vim.cmd.edit(vim.fn.fnameescape(project_json))
     else
@@ -36,9 +38,10 @@ return function(opts)
   for _, pjpath in ipairs(scan_for_project_json(workspace_root) or {}) do
     local dec = read_json(pjpath)
     local project_name = (dec and dec.name) or "unknown"
+
     if not lookup[project_name] then
       labels[#labels + 1] = project_name
-      lookup[project_name] = pjpath:match("(.+)/project.json$") or workspace_root
+      lookup[project_name] = pjpath:match("(.*)" .. sep_pattern .. "project%.json$") or workspace_root
     end
   end
 
@@ -54,7 +57,7 @@ return function(opts)
       ["default"] = function(selected)
         local item = selected[1] and lookup[selected[1]]
         if item then
-          vim.cmd.edit(vim.fn.fnameescape(item .. "/project.json"))
+          vim.cmd.edit(vim.fn.fnameescape(item .. sep .. "project.json"))
         end
       end,
     },

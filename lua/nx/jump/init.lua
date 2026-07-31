@@ -39,7 +39,7 @@ return function(opts)
       ["default"] = function(selected)
         local item = selected[1] and lookup[selected[1]]
         if item then
-          vim.cmd.cd(vim.fn.fnameescape(item))
+          return vim.cmd.cd(vim.fn.fnameescape(item))
         end
       end,
     },

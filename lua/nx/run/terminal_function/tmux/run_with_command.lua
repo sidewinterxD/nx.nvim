@@ -2,7 +2,7 @@ local find_workspace_root   = require("nx.utils.find_workspace_root")
 local run_full_tmux_command = require("nx.run.terminal_function.tmux.run_full_tmux_command")
 local nx_options            = require("nx").options
 
-return function(final_cmd, node_version, split)
+return function(final_cmd, node_version, split, debug)
   local shell = nx_options.shell
   local workspace_root = find_workspace_root()
   local direction = split == "Vertical Split" and "-h" or "-v"
@@ -12,6 +12,12 @@ return function(final_cmd, node_version, split)
 
   if node_version then
     final_cmd = string.format("nvm use %s; %s", node_version, final_cmd)
+  end
+
+  if debug == true then
+    final_cmd = string.format("tmux set remain-on-exit failed; %s", final_cmd)
+  else
+    final_cmd = string.format("tmux set remain-on-exit off; %s", final_cmd)
   end
 
   local pane_cmd = shell == "fish"

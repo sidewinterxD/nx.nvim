@@ -7,7 +7,7 @@ local run_full_native_command = require("nx.run.terminal_function.native.run_ful
 local shell = nx_options.shell or vim.o.shell
 
 
-return function(cmd, keyword, node_version, split)
+return function(cmd, keyword, node_version, split, debug)
   local workspace_root = find_workspace_root()
   local full_cmd = cmd
 

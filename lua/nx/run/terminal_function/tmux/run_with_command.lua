@@ -14,12 +14,6 @@ return function(final_cmd, node_version, split, debug)
     final_cmd = string.format("nvm use %s; %s", node_version, final_cmd)
   end
 
-  if debug == true then
-    final_cmd = string.format("tmux set remain-on-exit failed; %s", final_cmd)
-  else
-    final_cmd = string.format("tmux set remain-on-exit off; %s", final_cmd)
-  end
-
   local pane_cmd = shell == "fish"
       and string.format('fish -c %q', final_cmd)
       or final_cmd
@@ -30,7 +24,7 @@ return function(final_cmd, node_version, split, debug)
     size,
     workspace_root,
     pane_cmd
-  )
+  ) .. (debug == true and " \\; set-option -p remain-on-exit failed" or " \\; set-option -p remain-on-exit off")
 
   run_full_tmux_command({ split_cmd })
 end

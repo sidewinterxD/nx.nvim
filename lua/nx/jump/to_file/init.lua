@@ -53,13 +53,17 @@ return function(opts)
   return popup({
     items = labels,
     prompt = "Select NX project.json> ",
-    actions = {
-      ["default"] = function(selected)
-        local item = selected[1] and lookup[selected[1]]
-        if item then
-          vim.cmd.edit(vim.fn.fnameescape(item .. sep .. "project.json"))
+    keybinds = {
+      {
+        key = "Enter",
+        desc = "Select",
+        fn = function(selected)
+          local item = selected[1] and lookup[selected[1]]
+          if item then
+            vim.cmd.edit(vim.fn.fnameescape(item .. sep .. "project.json"))
+          end
         end
-      end,
+      },
     },
   })
 end

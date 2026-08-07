@@ -28,14 +28,18 @@ return function(opts, callback)
   return popup({
     items = lines,
     prompt = 'Select NX command> ',
-    actions = {
+    keybinds = {
       -- On default action (Enter), run your function
-      ['default'] = function(selected)
-        -- selected is a table of selected lines (usually just one)
-        if selected[1] then
-          callback(selected[1])
+      {
+        key = "Enter",
+        desc = 'Select',
+        fn = function(selected)
+          -- selected is a table of selected lines (usually just one)
+          if selected[1] then
+            callback(selected[1])
+          end
         end
-      end,
+      },
     },
   })
 end

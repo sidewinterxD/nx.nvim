@@ -35,13 +35,17 @@ return function(opts)
   return popup({
     items = labels,
     prompt = "Select NX Project> ",
-    actions = {
-      ["default"] = function(selected)
-        local item = selected[1] and lookup[selected[1]]
-        if item then
-          return vim.cmd.cd(vim.fn.fnameescape(item))
+    keybinds = {
+      {
+        key = "Enter",
+        desc = "Select",
+        fn = function(selected)
+          local item = selected[1] and lookup[selected[1]]
+          if item then
+            return vim.cmd.cd(vim.fn.fnameescape(item))
+          end
         end
-      end,
+      },
     },
   })
 end

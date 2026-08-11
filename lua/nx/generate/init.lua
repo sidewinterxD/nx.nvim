@@ -53,12 +53,16 @@ return function()
   popup({
     items = labels,
     prompt = 'Select generator> ',
-    actions = {
-      ["enter"] = function(selected)
-        local item = selected[1] and lookup[selected[1]]
-        print(vim.inspect(item))
-        -- You can add code here to run the selected generator
-      end,
+    keybinds = {
+      {
+        key = "Enter",
+        desc = 'Select',
+        fn = function(selected)
+          local item = selected[1] and lookup[selected[1]]
+          print(vim.inspect(item))
+          -- You can add code here to run the selected generator
+        end
+      },
     },
   })
 end

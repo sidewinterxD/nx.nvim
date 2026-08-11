@@ -25,13 +25,17 @@ return function(callback)
   return popup({
     items = labels,
     prompt = 'Select command from history> ',
-    actions = {
-      ['default'] = function(selected)
-        local item = selected[1] and lookup[selected[1]]
-        if item then
-          return callback(item.cmd, item.node_version, item.split)
+    keybinds = {
+      {
+        key = "Enter",
+        desc = "Select",
+        fn = function(selected)
+          local item = selected[1] and lookup[selected[1]]
+          if item then
+            return callback(item.cmd, item.node_version, item.split)
+          end
         end
-      end
+      }
     }
   })
 end

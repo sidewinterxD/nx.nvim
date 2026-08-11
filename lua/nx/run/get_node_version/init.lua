@@ -21,12 +21,16 @@ return function(cmd, keyword, callback)
   return popup({
     items = nvm_list_output,
     prompt = 'Select Node version> ',
-    actions = {
-      ['default'] = function(selected)
-        if selected[1] then
-          return callback(cmd, keyword, parse_version(selected[1]))
+    keybinds = {
+      {
+        key = "Enter",
+        desc = 'Select',
+        fn = function(selected)
+          if selected[1] then
+            return callback(cmd, keyword, parse_version(selected[1]))
+          end
         end
-      end
+      }
     }
   })
 end

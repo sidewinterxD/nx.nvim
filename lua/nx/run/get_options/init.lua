@@ -51,19 +51,27 @@ return function(callback)
     fzf_opts = {
       ['--multi'] = true,
     },
-    actions = {
-      ['ctrl-r'] = function()
-        callback()
-      end,
-      ["enter"] = function(selected)
-        local selected_options = {}
-
-        for _, option in ipairs(selected) do
-          table.insert(selected_options, '--' .. option)
+    keybinds = {
+      {
+        key = 'Ctrl-r',
+        desc = "Run with no options",
+        fn = function()
+          callback()
         end
+      },
+      {
+        key = "Enter",
+        desc = "Select",
+        fn = function(selected)
+          local selected_options = {}
 
-        callback(selected_options)
-      end,
+          for _, option in ipairs(selected) do
+            table.insert(selected_options, '--' .. option)
+          end
+
+          callback(selected_options)
+        end
+      },
     },
   })
 end

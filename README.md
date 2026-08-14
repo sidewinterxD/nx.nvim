@@ -43,12 +43,15 @@ require("nx").setup({
     nvm = {
         enabled = false      -- enable nvm support
     },
-    tmux = {
-        enabled = false      -- run commands in tmux pane if available
+    herdr = {
+        enabled = false      -- run commands in herdr panel, if in a workspace
     },
-    split_sizes = {          -- default split sizes
-        horizontal = 12,
-        vertical = 50,
+    tmux = {
+        enabled = false      -- run commands in tmux pane if in a tmux session
+    },
+    split_sizes = {          -- default split sizes. - NOTE herdr will convert to float. tmux will interperate as 20%
+        horizontal = 20,
+        vertical = 20,
     },
     shell = nil,             -- defaults to vim.o.shell
     skip_dirs = {            -- directories to ignore when searching for projects

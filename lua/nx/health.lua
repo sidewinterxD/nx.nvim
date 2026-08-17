@@ -47,6 +47,7 @@ M.check = function()
   -- Optional system dependencies
   vim.health.start("nx: optional dependencies")
   check_executable("tmux", { optional = true, reason = "terminal integration will use native terminal" })
+  check_executable("herdr", { optional = true, reason = "terminal integration will use native terminal" })
   check_plugin("which-key", { optional = true, reason = "provides keymap group labels" })
 
   -- nvm: fish.nvm takes precedence, fall back to regular nvm

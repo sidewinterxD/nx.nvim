@@ -22,7 +22,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 
 - [tmux](https://github.com/tmux/tmux) — run Nx commands in a tmux pane instead of the native terminal 
 - [Herdr](https://herdr.dev/) — run Nx commands in Herdr panes instead of native terminal
-- NOTE: Choose one. Tmux takes precedence if both is enabled. 
+NOTE: Choose one. Tmux takes precedence if both is enabled. 
 - [nvm](https://github.com/nvm-sh/nvm) — automatic Node version switching
 - [fish.nvm](https://github.com/jorgebucaran/nvm.fish) — nvm support for fish shell users
 

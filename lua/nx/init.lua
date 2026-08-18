@@ -19,6 +19,9 @@ local default_options = {
   tmux = {
     enabled = false,
   },
+  herdr = {
+    enabled = false,
+  },
   split_sizes = {
     horizontal = 12,
     vertical = 50,

@@ -11,7 +11,7 @@ return function(file_path)
   end
 
   while path ~= "" and path ~= sep do
-    if get_file_stats(path .. sep .. "project.json") then
+    if get_file_stats(path .. sep .. "package.json") then
       return path
     end
 

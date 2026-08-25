@@ -58,7 +58,7 @@ return function(root, max_depth, max_results)
     recurse(root, 0)
   end
 
-  for _, sub in ipairs({ "apps", "libs" }) do
+  for _, sub in ipairs({ "apps", "libs", "packages" }) do
     local dir = root .. sep .. sub
     if get_file_stats(dir) and #results < max_results and not SKIP_DIRS[sub] then
       recurse(dir, 0)

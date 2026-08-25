@@ -1,10 +1,12 @@
 local get_node_version = require("nx.run.get_node_version")
 local run = require("nx.run.terminal_function.run")
+local get_nx_bin = require("nx.utils.get_nx_bin")
 
 local nx_options = require("nx").options
 
 return function(item)
-  local run_cmd = "npx nx run " .. item
+  local nx_bin = get_nx_bin() or "npx nx"
+  local run_cmd = nx_bin .. " run " .. item
   local keyword = item:match("[%w_-]+:([%w_-]+)")
 
   -- check if nvm should be used

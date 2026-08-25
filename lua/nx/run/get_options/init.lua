@@ -14,14 +14,24 @@ return function(callback)
     "node_modules",
     "@nx",
     "jest",
+  }
+
+  local dist_config_path = sep .. table.concat(vim.list_extend(vim.deepcopy(config_path_entries), {
+    "dist",
     "src",
     "executors",
     "jest",
-    "schema.json"
-  }
+    "schema.json",
+  }), sep)
 
-  local config_path = sep .. table.concat(config_path_entries, sep)
-  local config_json = read_json(config_path)
+  local src_config_path = sep .. table.concat(vim.list_extend(vim.deepcopy(config_path_entries), {
+    "src",
+    "executors",
+    "jest",
+    "schema.json",
+  }), sep)
+
+  local config_json = read_json(dist_config_path) or read_json(src_config_path)
 
   if not config_json then return nil end
 

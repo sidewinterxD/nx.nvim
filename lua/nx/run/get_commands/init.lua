@@ -21,22 +21,20 @@ return function(opts, callback)
     items = lines,
     prompt = 'Select NX command> ',
     filter = run_local_project and function()
-      local filtered = {}
       local open_file = vim.api.nvim_buf_get_name(0)
       local local_root = find_project_root(open_file)
-      local project_name = vim.fn.fnamemodify(local_root, ":t")
+      local include_all = (local_root == "." or local_root == "" or local_root == workspace_root)
+      local project_name = include_all and nil or vim.fs.basename(local_root)
 
-      if local_root == "." or local_root == "" or local_root == workspace_root then
-        return lines
-      end
-
-      for _, target in ipairs(target_list_cache) do
-        if target.project == project_name then
-          filtered[#filtered + 1] = target.command
+      local out = {}
+      for i = 1, #target_list_cache do
+        local target = target_list_cache[i]
+        if include_all or target.project == project_name then
+          out[#out + 1] = target.command
         end
       end
 
-      return filtered
+      return out
     end,
     keybinds = {
       {

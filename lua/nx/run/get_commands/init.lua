@@ -1,30 +1,27 @@
 local find_workspace_root = require("nx.utils.find_workspace_root")
 local collect_targets = require("nx.utils.collect_targets")
+local target_list_cache = require("nx").target_list
 
 local popup = require("nx.popup.fzf_lua_popup")
 
 return function(opts, callback)
-  local run_local_project = opts.run_local or false
-
   local project_root = find_workspace_root()
-  local items = collect_targets(project_root) or {}
-
   local lines = {}
 
-  for _, target in ipairs(items) do
-    lines[#lines + 1] = target.command
+  if target_list_cache and #target_list_cache > 0 then
+    for _, target in ipairs(target_list_cache) do
+      lines[#lines + 1] = target.command
+    end
   end
 
-  return popup({
+  local handle = popup({
     items = lines,
     prompt = 'Select NX command> ',
     keybinds = {
-      -- On default action (Enter), run your function
       {
         key = "Enter",
         desc = 'Select',
         fn = function(selected)
-          -- selected is a table of selected lines (usually just one)
           if selected[1] then
             callback(selected[1])
           end
@@ -32,4 +29,19 @@ return function(opts, callback)
       },
     },
   })
+
+  if not (target_list_cache and #target_list_cache > 0) then
+    collect_targets(project_root, function(targets)
+      target_list_cache = targets or {}
+      local new_lines = {}
+      for _, target in ipairs(target_list_cache) do
+        new_lines[#new_lines + 1] = target.command
+      end
+      if handle and handle.update then
+        handle.update(new_lines)
+      end
+    end)
+  end
+
+  return handle
 end

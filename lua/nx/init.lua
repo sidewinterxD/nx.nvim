@@ -1,8 +1,10 @@
+local collect_targets = require "nx.utils.collect_targets"
 local M = {}
 
 -- Setup caches
 M.file_cache = {}
 M.stat_cache = {}
+M.target_list = {}
 M.last_command = {
   node_version = nil,
   cmd = nil,
@@ -10,10 +12,6 @@ M.last_command = {
   full_cmd = nil
 }
 M.command_history = {}
-
--- Minimal startup cache for Nx projects + targets
-M.projects = {}
-M.target_list = {}
 
 -- Default options
 local default_options = {
@@ -35,79 +33,6 @@ local default_options = {
 }
 
 M.options = vim.deepcopy(default_options)
-
--- local function preload_projects_and_targets(root)
---   local nx_bin = "nx"
---   local local_nx_bin = root .. "/node_modules/.bin/nx"
---
---   if vim.fn.executable(nx_bin) == 0 then
---     if vim.fn.executable(local_nx_bin) == 1 then
---       nx_bin = local_nx_bin
---     else
---       return
---     end
---   end
---
---   vim.system(
---     { nx_bin, "graph", "--file=stdout", "--verbose" },
---     { cwd = root, text = true },
---     function(res)
---       if res.code ~= 0 then
---         vim.schedule(function()
---           vim.notify("nx graph failed: " .. (res.stderr or ""), vim.log.levels.WARN)
---         end)
---         return
---       end
---
---       local ok, decoded = pcall(vim.json.decode, res.stdout or "")
---       if not ok then
---         return
---       end
---
---       local nodes = (((decoded or {}).graph or {}).nodes) or {}
---       local projects = {}
---       local project_list = {}
---       local target_list = {}
---
---       for name, node in pairs(nodes) do
---         local project_root = node.data and node.data.root
---         local targets = {}
---
---         for target_name, _ in pairs((node.data and node.data.targets) or {}) do
---           targets[#targets + 1] = target_name
---           target_list[#target_list + 1] = {
---             project = name,
---             target = target_name,
---             command = name .. ":" .. target_name,
---           }
---         end
---
---         table.sort(targets)
---
---         projects[name] = {
---           root = project_root,
---           targets = targets,
---         }
---
---         project_list[#project_list + 1] = {
---           name = name,
---           root = project_root,
---         }
---       end
---
---       table.sort(project_list, function(a, b) return a.name < b.name end)
---       table.sort(target_list, function(a, b) return a.command < b.command end)
---
---       M.projects = projects
---       M.project_list = project_list
---       M.target_list = target_list
---
---       vim.schedule(function()
---         vim.notify("Nx projects and targets preloaded", vim.log.levels.INFO)
---       end)
---     end
---   )
--- end
 
 function M.setup(opts)
   -- Safely extract user options even if passed via sub-tables or straight maps
@@ -147,6 +72,10 @@ function M.setup(opts)
   for _, km in ipairs(keymaps) do
     vim.keymap.set("n", km[1], km[2], { desc = km.desc, noremap = true, silent = true })
   end
+
+  collect_targets(nil, function(targets)
+    M.target_list = targets
+  end)
 
   return M
 end

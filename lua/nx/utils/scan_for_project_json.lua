@@ -40,8 +40,8 @@ return function(root, max_depth, max_results)
     end
 
     for _, e in ipairs(entries) do
-      if e.name == "project.json" then
-        results[#results + 1] = path .. sep .. "project.json"
+      if e.name == "project.json" or e.name == "package.json" then
+        results[#results + 1] = path .. sep .. e.name
         if #results >= max_results then
           return
         end

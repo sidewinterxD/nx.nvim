@@ -5,7 +5,7 @@ local get_nx_bin = require("nx.utils.get_nx_bin")
 local nx_options = require("nx").options
 
 return function(item)
-  local nx_bin = get_nx_bin() or "npx nx"
+  local nx_bin = get_nx_bin()
   local run_cmd = nx_bin .. " run " .. item
   local keyword = item:match("[%w_-]+:([%w_-]+)")
 

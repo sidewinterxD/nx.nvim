@@ -9,6 +9,7 @@
 - [x] Run Test with options
 - [x] Re-run last command
 - [x] Enable horizontal and vertical split
+- [x] support for using nx bin directly from project instead relying on npx nx
 
 ## Node Version Management
 
@@ -27,8 +28,8 @@
 
 - [x] Fuzzy-find and jump to project root
 - [x] Jump to Workspace root
-- [x] fuzzy-find and jump to `project.json`
-- [x] Jump to `project.json` for current project
+- [x] fuzzy-find and jump to `project.json` or `package.json`
+- [x] Jump to `project.json` or `package.json` for current project
 - [x] Jump to workspace config (nx.json)
 
 ## Workspace Utilities
@@ -38,8 +39,8 @@
 - [ ] Show affected projects (based on current git changes)
 - [ ] Browse and filter projects by Nx tags
 - [ ] View task pipeline / `dependsOn` chain for a target
-- [ ] Cache management (`nx reset`)
-- [ ] Support for target not from project.json files
+- [x] Cache management (`nx reset`)
+- [x] Support for target not from project.json files
 
 ## Editor Integration
 

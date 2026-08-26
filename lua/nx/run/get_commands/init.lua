@@ -1,12 +1,15 @@
 local find_workspace_root = require("nx.utils.find_workspace_root")
+local find_project_root = require("nx.utils.find_project_root")
 local collect_targets = require("nx.utils.collect_targets")
 local target_list_cache = require("nx").target_list
 
 local popup = require("nx.popup.fzf_lua_popup")
 
 return function(opts, callback)
-  local project_root = find_workspace_root()
+  local workspace_root = find_workspace_root()
   local lines = {}
+  local run_local_project = opts.run_local or false
+
 
   if target_list_cache and #target_list_cache > 0 then
     for _, target in ipairs(target_list_cache) do
@@ -17,6 +20,24 @@ return function(opts, callback)
   local handle = popup({
     items = lines,
     prompt = 'Select NX command> ',
+    filter = run_local_project and function()
+      local filtered = {}
+      local open_file = vim.api.nvim_buf_get_name(0)
+      local local_root = find_project_root(open_file)
+      local project_name = vim.fn.fnamemodify(local_root, ":t")
+
+      if local_root == "." or local_root == "" or local_root == workspace_root then
+        return lines
+      end
+
+      for _, target in ipairs(target_list_cache) do
+        if target.project == project_name then
+          filtered[#filtered + 1] = target.command
+        end
+      end
+
+      return filtered
+    end,
     keybinds = {
       {
         key = "Enter",
@@ -31,12 +52,14 @@ return function(opts, callback)
   })
 
   if not (target_list_cache and #target_list_cache > 0) then
-    collect_targets(project_root, function(targets)
+    collect_targets(workspace_root, function(targets)
       target_list_cache = targets or {}
       local new_lines = {}
+
       for _, target in ipairs(target_list_cache) do
         new_lines[#new_lines + 1] = target.command
       end
+
       if handle and handle.update then
         handle.update(new_lines)
       end

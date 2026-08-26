@@ -14,6 +14,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 ## Requirements
 
 - [Neovim](https://neovim.io/) >= 0.9
+- [NX](https://nx.dev/)
 - [node](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) / [npx](https://www.npmjs.com/package/npx)
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua)

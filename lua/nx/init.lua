@@ -74,7 +74,12 @@ function M.setup(opts)
   end
 
   collect_targets(nil, function(targets)
-    M.target_list = targets
+    if targets and #targets > 0 then
+      M.target_list = targets
+      return
+    end
+
+    vim.notify("Nx: No targets found in workspace", vim.log.levels.WARN, { title = "Nx" })
   end)
 
   return M

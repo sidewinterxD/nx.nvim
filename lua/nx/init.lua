@@ -3,7 +3,6 @@ local M = {}
 
 -- Setup caches
 M.file_cache = {}
-M.stat_cache = {}
 M.target_list = {}
 M.last_command = {
   node_version = nil,

@@ -1,40 +1,46 @@
-local build_lines = require("nx.utils.build_lines")
-local find_project_root = require("nx.utils.find_project_root")
 local find_workspace_root = require("nx.utils.find_workspace_root")
+local find_project_root = require("nx.utils.find_project_root")
 local collect_targets = require("nx.utils.collect_targets")
+local target_list_cache = require("nx").target_list
 
 local popup = require("nx.popup.fzf_lua_popup")
 
 return function(opts, callback)
+  local workspace_root = find_workspace_root()
+  local lines = {}
   local run_local_project = opts.run_local or false
 
-  local project_root = find_workspace_root()
 
-  if run_local_project then
-    local local_file = vim.api.nvim_buf_get_name(0)
-
-    project_root = find_project_root(local_file)
+  if target_list_cache and #target_list_cache > 0 then
+    for _, target in ipairs(target_list_cache) do
+      lines[#lines + 1] = target.command
+    end
   end
 
-  local items = collect_targets(project_root)
-
-  if not items or #items == 0 then
-    vim.notify("nx: no targets or scripts found in " .. project_root, vim.log.levels.INFO)
-    return
-  end
-
-  local lines = build_lines(items)
-
-  return popup({
+  local handle = popup({
     items = lines,
     prompt = 'Select NX command> ',
+    filter = run_local_project and function()
+      local open_file = vim.api.nvim_buf_get_name(0)
+      local local_root = find_project_root(open_file)
+      local include_all = (local_root == "." or local_root == "" or local_root == workspace_root)
+      local project_name = include_all and nil or vim.fs.basename(local_root)
+
+      local out = {}
+      for i = 1, #target_list_cache do
+        local target = target_list_cache[i]
+        if include_all or target.project == project_name then
+          out[#out + 1] = target.command
+        end
+      end
+
+      return out
+    end,
     keybinds = {
-      -- On default action (Enter), run your function
       {
         key = "Enter",
         desc = 'Select',
         fn = function(selected)
-          -- selected is a table of selected lines (usually just one)
           if selected[1] then
             callback(selected[1])
           end
@@ -42,4 +48,21 @@ return function(opts, callback)
       },
     },
   })
+
+  if not (target_list_cache and #target_list_cache > 0) then
+    collect_targets(workspace_root, function(targets)
+      target_list_cache = targets or {}
+      local new_lines = {}
+
+      for _, target in ipairs(target_list_cache) do
+        new_lines[#new_lines + 1] = target.command
+      end
+
+      if handle and handle.update then
+        handle.update(new_lines)
+      end
+    end)
+  end
+
+  return handle
 end

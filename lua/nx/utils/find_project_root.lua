@@ -13,6 +13,8 @@ return function(file_path)
   while path ~= "" and path ~= sep do
     if get_file_stats(path .. sep .. "project.json") then
       return path
+    elseif get_file_stats(path .. sep .. "package.json") then
+      return path
     end
 
     local parent = fn.fnamemodify(path, ":h")

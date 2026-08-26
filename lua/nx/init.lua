@@ -1,8 +1,10 @@
+local collect_targets = require "nx.utils.collect_targets"
 local M = {}
 
 -- Setup caches
 M.file_cache = {}
 M.stat_cache = {}
+M.target_list = {}
 M.last_command = {
   node_version = nil,
   cmd = nil,
@@ -70,6 +72,15 @@ function M.setup(opts)
   for _, km in ipairs(keymaps) do
     vim.keymap.set("n", km[1], km[2], { desc = km.desc, noremap = true, silent = true })
   end
+
+  collect_targets(nil, function(targets)
+    if targets and #targets > 0 then
+      M.target_list = targets
+      return
+    end
+
+    vim.notify("Nx: No targets found in workspace", vim.log.levels.WARN, { title = "Nx" })
+  end)
 
   return M
 end

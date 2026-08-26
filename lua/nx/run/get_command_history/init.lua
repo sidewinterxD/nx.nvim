@@ -6,16 +6,17 @@ return function(callback)
   local labels = {}
   local lookup = {}
 
-  for _, cmd_info in ipairs(command_history) do
+  for i, cmd_info in ipairs(command_history) do
     local raw_cmd = nx_options.tmux.enabled == true and cmd_info.cmd or cmd_info.full_cmd
     local cmd_name = raw_cmd:match("nx run ([^%s']+)") or "unknown"
     local node_version = cmd_info.node_version or "N/A"
     local split = cmd_info.split or "N/A"
-    local label = string.format("%s | Node version: %s | Split: %s", cmd_name, node_version, split)
+    local label = string.format("%d. %s | Node version: %s | Split: %s", i, cmd_name, node_version, split)
 
     table.insert(labels, label)
+    table.sort(labels)
 
-    lookup[label] = {
+    lookup[#label + 1] = {
       cmd = raw_cmd,
       node_version = node_version,
       split = split

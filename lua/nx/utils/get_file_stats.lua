@@ -1,5 +1,4 @@
-local stat_cache = require("nx").stat_cache
-
+local stat_cache = {}
 local uv = vim.loop
 
 return function(path)

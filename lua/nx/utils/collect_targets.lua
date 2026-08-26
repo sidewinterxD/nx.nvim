@@ -1,27 +1,42 @@
 local find_project_root = require("nx.utils.find_project_root")
-local scan_for_project_json = require("nx.utils.scan_for_project_json")
-local read_json = require("nx.utils.read_json")
-local get_project_name = require("nx.utils.get_project_name")
-local add_targets = require("nx.utils.add_targets")
+local get_nx_bin = require("nx.utils.get_nx_bin")
 
-return function(root)
+return function(root, callback)
   root = root or find_project_root()
+  local nx_bin = get_nx_bin()
 
-  local items = {}
-  local seen_projects = {}
-
-  for _, pjpath in ipairs(scan_for_project_json(root) or {}) do
-    local dec = read_json(pjpath)
-
-    if dec and type(dec.targets) == "table" then
-      local project_name = get_project_name(dec, pjpath)
-
-      if not seen_projects[project_name] then
-        seen_projects[project_name] = true
-        add_targets(items, project_name, dec, pjpath)
+  vim.system(
+    { nx_bin, "graph", "--file=stdout", "--verbose" },
+    { cwd = root, text = true },
+    function(res)
+      if res.code ~= 0 then
+        vim.schedule(function()
+          vim.notify("nx graph failed: " .. (res.stderr or ""), vim.log.levels.WARN)
+          callback(nil)
+        end)
+        return
       end
-    end
-  end
 
-  return items
+      local ok, decoded = pcall(vim.json.decode, res.stdout or "")
+      if not ok then
+        vim.schedule(function() callback(nil) end)
+        return
+      end
+
+      local nodes = (((decoded or {}).graph or {}).nodes) or {}
+      local target_list = {}
+
+      for name, node in pairs(nodes) do
+        for target_name, _ in pairs((node.data and node.data.targets) or {}) do
+          target_list[#target_list + 1] = {
+            project = name,
+            target = target_name,
+            command = name .. ":" .. target_name,
+          }
+        end
+      end
+
+      vim.schedule(function() callback(target_list) end)
+    end
+  )
 end

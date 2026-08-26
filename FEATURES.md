@@ -4,12 +4,13 @@
 
 - [x] Run Nx commands in native Neovim terminal
 - [x] Run Nx commands in tmux pane (if available)
+- [x] Run Nx commands in Herdr pane (if available)
 - [x] Run Nx command for current file's project
 - [x] Run Nx command from history
 - [x] Run Test with options
 - [x] Re-run last command
-- [x] Enable horizontal and vertical split
-- [x] support for using nx bin directly from project instead relying on npx nx
+- [x] Enable horizontal and vertical split and default sizes (Floats)
+- [x] Support for using nx bin directly from project instead relying on npx nx
 
 ## Node Version Management
 
@@ -26,11 +27,11 @@
 
 ## Project Navigation
 
-- [x] Fuzzy-find and jump to project root
-- [x] Jump to Workspace root
+- [x] Fuzzy-find and jump (cd) to project root
+- [x] Jump (cd) to Workspace root
 - [x] fuzzy-find and jump to `project.json` or `package.json`
 - [x] Jump to `project.json` or `package.json` for current project
-- [x] Jump to workspace config (nx.json)
+- [x] Jump to workspace config (`nx.json`)
 
 ## Workspace Utilities
 

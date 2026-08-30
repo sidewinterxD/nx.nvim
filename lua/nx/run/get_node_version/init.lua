@@ -20,7 +20,10 @@ return function(cmd, keyword, callback)
 
   return popup({
     items = nvm_list_output,
-    prompt = 'Select Node version> ',
+    prompt = 'Select version> ',
+    winopts = {
+      title = ' Node Versions ',
+    },
     keybinds = {
       {
         key = "Enter",

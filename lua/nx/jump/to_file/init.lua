@@ -61,7 +61,10 @@ return function(opts)
 
   return popup({
     items = labels,
-    prompt = "Select NX project> ",
+    prompt = "Select Project> ",
+    winopts = {
+      title = ' NX Projects ',
+    },
     keybinds = {
       {
         key = "Enter",

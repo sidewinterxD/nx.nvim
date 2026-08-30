@@ -49,11 +49,6 @@ return function(opts, callback)
           end
         end
       },
-      {
-        key = "ctrl-c",
-        desc = "Close",
-        fn = function() return true end
-      }
     },
   })
 

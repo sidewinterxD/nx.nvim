@@ -25,7 +25,10 @@ return function(callback)
 
   return popup({
     items = labels,
-    prompt = 'Select command from history> ',
+    prompt = 'Select command> ',
+    winopts = {
+      title = ' NX Command History ',
+    },
     keybinds = {
       {
         key = "Enter",

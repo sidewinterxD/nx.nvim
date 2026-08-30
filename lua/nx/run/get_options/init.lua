@@ -57,7 +57,10 @@ return function(callback)
 
   return popup({
     items = lines,
-    prompt = 'Select test option> ',
+    prompt = 'Select option> ',
+    winopts = {
+      title = ' NX Jest Options ',
+    },
     fzf_opts = {
       ['--multi'] = true,
     },

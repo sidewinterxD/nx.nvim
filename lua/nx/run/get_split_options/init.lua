@@ -9,7 +9,10 @@ return function(cmd, keyword, node_version, callback)
       "Horizontal Split | Default",
       "Vertical Split",
     },
-    prompt = 'Select split way> ',
+    prompt = 'Select split> ',
+    winopts = {
+      title = ' Split Options ',
+    },
     keybinds = {
       {
         key = "Enter",

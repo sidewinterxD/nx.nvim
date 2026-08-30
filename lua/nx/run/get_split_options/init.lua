@@ -43,6 +43,11 @@ return function(cmd, keyword, node_version, callback)
           end
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     }
   })
 end

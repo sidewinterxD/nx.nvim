@@ -36,7 +36,13 @@ return function(callback)
             return callback(item.cmd, item.node_version, item.split)
           end
         end
+      },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
       }
+
     }
   })
 end

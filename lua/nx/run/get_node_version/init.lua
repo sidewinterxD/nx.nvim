@@ -30,6 +30,11 @@ return function(cmd, keyword, callback)
             return callback(cmd, keyword, parse_version(selected[1]))
           end
         end
+      },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
       }
     }
   })

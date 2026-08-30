@@ -25,8 +25,12 @@ return function(root, callback)
 
       local nodes = (((decoded or {}).graph or {}).nodes) or {}
       local target_list = {}
+      local project_list = {}
 
       for name, node in pairs(nodes) do
+        project_list[#project_list + 1] = {
+          name = name,
+        }
         for target_name, _ in pairs((node.data and node.data.targets) or {}) do
           target_list[#target_list + 1] = {
             project = name,
@@ -36,7 +40,7 @@ return function(root, callback)
         end
       end
 
-      vim.schedule(function() callback(target_list) end)
+      vim.schedule(function() callback(target_list, project_list) end)
     end
   )
 end

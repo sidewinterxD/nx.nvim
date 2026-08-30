@@ -58,6 +58,10 @@ pcall(vim.api.nvim_create_user_command, "NxPickJumpProjectJson", function()
   require("nx.jump.to_file")()
 end, { desc = "Nx Pick project.json" })
 
+pcall(vim.api.nvim_create_user_command, 'NxShowGraph', function()
+  require('nx.graph')()
+end, { desc = 'Nx Show Graph' })
+
 pcall(vim.api.nvim_create_user_command, 'NxGenerate', function()
   require('nx.generate')()
 end, { desc = 'Nx Generate @nx/react' })

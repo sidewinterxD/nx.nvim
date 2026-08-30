@@ -19,7 +19,10 @@ return function(opts, callback)
 
   local handle = popup({
     items = lines,
-    prompt = 'Select NX command> ',
+    prompt = 'Select command> ',
+    winopts = {
+      title = opts.run_local and ' Project Commands ' or ' All Commands ',
+    },
     filter = run_local_project and function()
       local open_file = vim.api.nvim_buf_get_name(0)
       local local_root = find_project_root(open_file)
@@ -46,6 +49,11 @@ return function(opts, callback)
           end
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     },
   })
 

@@ -63,6 +63,11 @@ return function()
           -- You can add code here to run the selected generator
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     },
   })
 end

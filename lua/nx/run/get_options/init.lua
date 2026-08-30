@@ -82,6 +82,11 @@ return function(callback)
           callback(selected_options)
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     },
   })
 end

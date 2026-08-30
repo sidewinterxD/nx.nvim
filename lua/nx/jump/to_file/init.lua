@@ -71,6 +71,11 @@ return function(opts)
           return open_project_file(item)
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     },
   })
 end

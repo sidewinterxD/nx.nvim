@@ -4,6 +4,7 @@ local M = {}
 -- Setup caches
 M.file_cache = {}
 M.target_list = {}
+M.project_list = {}
 M.last_command = {
   node_version = nil,
   cmd = nil,
@@ -48,7 +49,6 @@ function M.setup(opts)
   if ok and wk.add then
     wk.add({
       { "<leader>nx",  group = "Nx" },
-      { "<leader>nxg", group = "Nx Generate" },
       { "<leader>nxj", group = "Nx Jump" }
     })
   end
@@ -60,21 +60,22 @@ function M.setup(opts)
     { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",            desc = "Run command for history" },
     { "<leader>nxl",  "<cmd>NxRunLocal<CR>",             desc = "Select command from current project" },
     { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Nx Reset workspace" },
-    { "<leader>nxgr", "<cmd>NxGenerate<CR>",             desc = "Nx Generate @nx/react" },
     { "<leader>nxjp", "<cmd>NxJumpProject<CR>",          desc = "Nx Jump to project" },
     { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>",        desc = "Nx Jump to workspace" },
     { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Nx Open nx.json" },
     { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Nx Open local project.json" },
     { "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Nx Pick project.json" },
+    { "<leader>nxg",  "<cmd>NxShowGraph<CR>",            desc = "Nx Show Graph" },
   }
 
   for _, km in ipairs(keymaps) do
     vim.keymap.set("n", km[1], km[2], { desc = km.desc, noremap = true, silent = true })
   end
 
-  collect_targets(nil, function(targets)
-    if targets and #targets > 0 then
+  collect_targets(nil, function(targets, projects)
+    if targets and #targets > 0 and projects and #projects > 0 then
       M.target_list = targets
+      M.project_list = projects
       return
     end
 

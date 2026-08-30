@@ -46,6 +46,11 @@ return function(opts)
           end
         end
       },
+      {
+        key = "ctrl-c",
+        desc = "Close",
+        fn = function() return true end
+      }
     },
   })
 end

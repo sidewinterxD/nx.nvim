@@ -9,6 +9,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 - 🐞 Debug mode keeps the newly created pane open when the process exits
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
+- 🕸️ Show Nx graph and project dependencies
 - 📂 Jump to workspace, project directories, and config files (`nx.json`, `project.json`)
 
 ## Requirements
@@ -21,8 +22,8 @@ A fun little sideproject I made due to working with nx and missing easy command 
 
 ## Optional
 
-- [tmux](https://github.com/tmux/tmux) — run Nx commands in a tmux pane instead of the native terminal 
-- [Herdr](https://herdr.dev/) — run Nx commands in Herdr panes instead of native terminal 
+- [tmux](https://github.com/tmux/tmux) — run Nx commands in a tmux pane instead of the native terminal
+- [Herdr](https://herdr.dev/) — run Nx commands in Herdr panes instead of native terminal
 - [nvm](https://github.com/nvm-sh/nvm) — automatic Node version switching
 - [fish.nvm](https://github.com/jorgebucaran/nvm.fish) — nvm support for fish shell users
 
@@ -58,10 +59,6 @@ require("nx").setup({
         vertical = 20,
     },
     shell = nil,             -- defaults to vim.o.shell
-    skip_dirs = {            -- directories to ignore when searching for projects
-      "node_modules", "dist", "build", "out",
-      ".git", ".vscode", "target", "vendor"
-    },
   }
 })
 ```
@@ -80,6 +77,7 @@ require("nx").setup({
 | `<leader>nxjn` | `:NxJumpWorkspaceConfig`  | Open nx.json                        |
 | `<leader>nxjl` | `:NxJumpLocalProjectJson` | Open local project.json             |
 | `<leader>nxjP` | `:NxPickJumpProjectJson`  | Pick project.json                   |
+| `<leader>nxg`  | `:NxShowGraph`            | Show NX graph                       |
 
 ## Health Check
 

@@ -29,7 +29,6 @@ local default_options = {
     vertical = 50,
   },
   shell = vim.o.shell,
-  skip_dirs = { "node_modules", "dist", "build", "out", ".git", ".vscode", "target", "vendor" },
 }
 
 M.options = vim.deepcopy(default_options)

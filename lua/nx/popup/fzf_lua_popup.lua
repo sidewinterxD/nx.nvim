@@ -37,6 +37,10 @@ return function(opts)
       current_items = filter(current_items)
     end
 
+    if #current_items == 0 then
+      current_items = { "Loading..." }
+    end
+
     fzf_lua.fzf_exec(current_items, {
       prompt = prompt,
       fzf_opts = fzf_opts,

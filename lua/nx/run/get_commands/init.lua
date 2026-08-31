@@ -10,7 +10,6 @@ return function(opts, callback)
   local lines = {}
   local run_local_project = opts.run_local or false
 
-
   if target_list_cache and #target_list_cache > 0 then
     for _, target in ipairs(target_list_cache) do
       lines[#lines + 1] = target.command
@@ -19,7 +18,7 @@ return function(opts, callback)
 
   local handle = popup({
     items = lines,
-    prompt = 'Select command> ',
+    prompt = 'Select Command> ',
     winopts = {
       title = opts.run_local and ' Project Commands ' or ' All Commands ',
     },

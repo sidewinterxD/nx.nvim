@@ -34,16 +34,13 @@ local default_options = {
 M.options = vim.deepcopy(default_options)
 
 function M.setup(opts)
-  -- Safely extract user options even if passed via sub-tables or straight maps
   local user_opts = opts or {}
   if opts and opts.options then
     user_opts = opts.options
   end
 
-  -- Merge user options directly into the main module options
   M.options = vim.tbl_deep_extend("force", default_options, user_opts)
 
-  -- Register which-key group if available (Safely handles v3 spec)
   local ok, wk = pcall(require, "which-key")
   if ok and wk.add then
     wk.add({
@@ -58,13 +55,13 @@ function M.setup(opts)
     { "<leader>nxR",  "<cmd>NxReRun<CR>",                desc = "Re-run last command" },
     { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",            desc = "Run command for history" },
     { "<leader>nxl",  "<cmd>NxRunLocal<CR>",             desc = "Select command from current project" },
-    { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Nx Reset workspace" },
-    { "<leader>nxjp", "<cmd>NxJumpProject<CR>",          desc = "Nx Jump to project" },
-    { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>",        desc = "Nx Jump to workspace" },
-    { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Nx Open nx.json" },
-    { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Nx Open local project.json" },
-    { "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Nx Pick project.json" },
-    { "<leader>nxg",  "<cmd>NxShowGraph<CR>",            desc = "Nx Show Graph" },
+    { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Reset workspace" },
+    { "<leader>nxjp", "<cmd>NxJumpProject<CR>",          desc = "Jump to project" },
+    { "<leader>nxjw", "<cmd>NxJumpWorkspace<CR>",        desc = "Jump to workspace" },
+    { "<leader>nxjn", "<cmd>NxJumpWorkspaceConfig<CR>",  desc = "Open nx.json" },
+    { "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Open local project file" },
+    { "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Pick project file" },
+    { "<leader>nxg",  "<cmd>NxShowGraph<CR>",            desc = "Show Graph" },
   }
 
   for _, km in ipairs(keymaps) do

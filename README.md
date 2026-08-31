@@ -75,8 +75,8 @@ require("nx").setup({
 | `<leader>nxjp` | `:NxJumpProject`          | Jump to project                     |
 | `<leader>nxjw` | `:NxJumpWorkspace`        | Jump to workspace                   |
 | `<leader>nxjn` | `:NxJumpWorkspaceConfig`  | Open nx.json                        |
-| `<leader>nxjl` | `:NxJumpLocalProjectJson` | Open local project.json             |
-| `<leader>nxjP` | `:NxPickJumpProjectJson`  | Pick project.json                   |
+| `<leader>nxjl` | `:NxJumpLocalProjectJson` | Open local project file             |
+| `<leader>nxjP` | `:NxPickJumpProjectJson`  | Pick project file                   |
 | `<leader>nxg`  | `:NxShowGraph`            | Show NX graph                       |
 
 ## Health Check

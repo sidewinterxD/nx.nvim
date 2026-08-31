@@ -16,7 +16,7 @@ return function(callback)
     table.insert(labels, label)
     table.sort(labels)
 
-    lookup[#label + 1] = {
+    lookup[label] = {
       cmd = raw_cmd,
       node_version = node_version,
       split = split

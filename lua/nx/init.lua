@@ -1,4 +1,6 @@
 local collect_targets = require "nx.utils.collect_targets"
+local find_workspace_root = require "nx.utils.find_workspace_root"
+
 local M = {}
 
 -- Setup caches
@@ -34,6 +36,12 @@ local default_options = {
 M.options = vim.deepcopy(default_options)
 
 function M.setup(opts)
+  local workspace_root = find_workspace_root()
+
+  if not workspace_root then
+    return
+  end
+
   local user_opts = opts or {}
   if opts and opts.options then
     user_opts = opts.options

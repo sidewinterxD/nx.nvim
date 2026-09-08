@@ -6,7 +6,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 ## Features
 
 - 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
-- 🐞 Debug mode keeps the newly created pane open when the process exits
+- 🐞 Debug mode keeps the newly created pane open when the process exits - primarily in tmux
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
 - 🕸️ Show Nx graph and project dependencies

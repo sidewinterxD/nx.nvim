@@ -1,7 +1,8 @@
 local popup = require("nx.popup.fzf_lua_popup")
 
-return function(cmd, keyword, node_version, callback)
+return function(cmd, run_options, callback)
   local split = 'Horizontal Split'
+  run_options.split = split
   local debug = nil
 
   return popup({
@@ -21,7 +22,8 @@ return function(cmd, keyword, node_version, callback)
           if selected[1] then
             debug = false
             split = selected[1]
-            return callback(cmd, keyword, node_version, split)
+            run_options.split = split
+            return callback(cmd, run_options)
           end
         end
       },
@@ -30,7 +32,7 @@ return function(cmd, keyword, node_version, callback)
         desc = 'Default',
         fn = function()
           debug = false
-          return callback(cmd, keyword, node_version, split)
+          return callback(cmd, run_options)
         end
       },
       {
@@ -39,10 +41,11 @@ return function(cmd, keyword, node_version, callback)
         fn = function(selected) -- debug, do not close pane/window on fail
           if selected[1] then
             split = selected[1]
+            run_options.split = split
             debug = true
 
             vim.notify("nx: running command in debug", vim.log.levels.INFO)
-            return callback(cmd, keyword, node_version, split, debug)
+            return callback(cmd, run_options, debug)
           end
         end
       },

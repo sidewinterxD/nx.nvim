@@ -5,20 +5,20 @@ local get_split_options = require("nx.run.get_split_options")
 local nx_options        = require("nx").options
 local last_command      = require("nx").last_command
 
-local function run_switch(cmd, keyword, node_version, split, debug)
+local function run_switch(cmd, run_options)
   -- Update last_command with keyword and node_version
-  last_command.node_version = node_version
-  last_command.split = split
+  last_command.node_version = run_options.node_version
+  last_command.split = run_options.split
 
   if nx_options.tmux.enabled == true then
-    return tmux(cmd, keyword, node_version, split, debug)
+    return tmux(cmd, run_options)
   elseif nx_options.herdr.enabled == true then
-    return herdr(cmd, keyword, node_version, split, debug)
+    return herdr(cmd, run_options)
   else
-    return terminal(cmd, keyword, node_version, split, debug)
+    return terminal(cmd, run_options)
   end
 end
 
-return function(cmd, keyword, node_version)
-  return get_split_options(cmd, keyword, node_version, run_switch)
+return function(cmd, run_options)
+  return get_split_options(cmd, run_options, run_switch)
 end

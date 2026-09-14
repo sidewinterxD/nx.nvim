@@ -13,11 +13,10 @@ pcall(vim.api.nvim_create_user_command, 'NxReRun', function()
     vim.notify("No command to re-run", vim.log.levels.WARN)
     return
   end
-  local cmd = nx.options.tmux.enabled ~= false and nx.last_command.cmd or nx.last_command.full_cmd
-  local node_version = nx.last_command.node_version
-  local split = nx.last_command.split
 
-  require('nx.run.re_run')(cmd, node_version, split)
+  local cmd = nx.options.tmux.enabled ~= false and nx.last_command.cmd or nx.last_command.full_cmd
+
+  require('nx.run.re_run')(cmd, nx.last_command)
 end, { desc = 'Re-run last command' })
 
 pcall(vim.api.nvim_create_user_command, 'NxRunOldCmd', function()

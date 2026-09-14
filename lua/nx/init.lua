@@ -61,7 +61,7 @@ function M.setup(opts)
   local keymaps = {
     { "<leader>nxr",  "<cmd>NxRunRoot<CR>",              desc = "Select command from root project" },
     { "<leader>nxR",  "<cmd>NxReRun<CR>",                desc = "Re-run last command" },
-    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",            desc = "Run command for history" },
+    { "<leader>nxh",  "<cmd>NxRunOldCmd<CR>",            desc = "Run command from history" },
     { "<leader>nxl",  "<cmd>NxRunLocal<CR>",             desc = "Select command from current project" },
     { "<leader>nxW",  "<cmd>NxReset<CR>",                desc = "Reset workspace" },
     { "<leader>nxjp", "<cmd>NxJumpProject<CR>",          desc = "Jump to project" },

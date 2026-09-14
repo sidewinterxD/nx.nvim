@@ -6,16 +6,18 @@ local function parse_version(line)
   return line:match("v(%d+%.%d+%.%d+)")
 end
 
-return function(cmd, keyword, callback)
+return function(cmd, run_options, callback)
   local nvm_list_output = vim.fn.systemlist(shell .. " -c 'nvm list | grep -v system'")
+
 
   if #nvm_list_output == 0 then
     vim.notify("No Node versions found via nvm", vim.log.levels.WARN)
-    return callback(cmd, keyword, nil)
+    return callback(cmd, run_options, nil)
   end
 
   if #nvm_list_output == 1 then
-    return callback(cmd, keyword, parse_version(nvm_list_output[1]))
+    run_options.node_version = parse_version(nvm_list_output[1])
+    return callback(cmd, run_options)
   end
 
   return popup({
@@ -30,7 +32,8 @@ return function(cmd, keyword, callback)
         desc = 'Select',
         fn = function(selected)
           if selected[1] then
-            return callback(cmd, keyword, parse_version(selected[1]))
+            run_options.node_version = parse_version(selected[1])
+            return callback(cmd, run_options)
           end
         end
       },

@@ -10,6 +10,15 @@ return function(opts, callback)
   local lines = {}
   local run_local_project = opts.run_local or false
 
+  local run_options = {
+    layout_type = "pane",
+    split_direction = nil,
+    node_version = nil,
+    keyword = nil,
+    cmd = nil,
+    debug = false,
+  }
+
   if target_list_cache and #target_list_cache > 0 then
     for _, target in ipairs(target_list_cache) do
       lines[#lines + 1] = target.command
@@ -44,10 +53,20 @@ return function(opts, callback)
         desc = 'Select',
         fn = function(selected)
           if selected[1] then
-            callback(selected[1])
+            callback(selected[1], run_options)
           end
         end
       },
+      {
+        key = "ctrl-w",
+        desc = 'Run in window',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = "window"
+            callback(selected[1], run_options)
+          end
+        end
+      }
     },
   })
 

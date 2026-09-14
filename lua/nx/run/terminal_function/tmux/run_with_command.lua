@@ -2,11 +2,11 @@ local find_workspace_root   = require("nx.utils.find_workspace_root")
 local run_full_tmux_command = require("nx.run.terminal_function.tmux.run_full_tmux_command")
 local nx_options            = require("nx").options
 
-return function(final_cmd, node_version, split, debug)
+return function(final_cmd, run_options)
   local shell = nx_options.shell
   local workspace_root = find_workspace_root()
-  local direction = split == "Vertical Split" and "-h" or "-v"
-  local split_size = split == "Vertical Split"
+  local direction = run_options.split == "Vertical Split" and "-h" or "-v"
+  local split_size = run_options.split == "Vertical Split"
       and nx_options.split_sizes.vertical
       or nx_options.split_sizes.horizontal
 
@@ -15,8 +15,8 @@ return function(final_cmd, node_version, split, debug)
     split_size_arg = split_size_arg .. "%"
   end
 
-  if node_version then
-    final_cmd = string.format("nvm use %s; %s", node_version, final_cmd)
+  if run_options.node_version then
+    final_cmd = string.format("nvm use %s; %s", run_options.node_version, final_cmd)
   end
 
   local pane_cmd = shell == "fish"
@@ -24,12 +24,13 @@ return function(final_cmd, node_version, split, debug)
       or final_cmd
 
   local split_cmd = string.format(
-    "tmux split-window %s -f -l %q -P -F '#{pane_id}' -c %q %q",
-    direction,
-    split_size_arg,
-    workspace_root,
-    pane_cmd
-  ) .. (debug == true and " \\; set-option -p remain-on-exit failed" or " \\; set-option -p remain-on-exit off")
+        "tmux split-window %s -f -l %q -P -F '#{pane_id}' -c %q %q",
+        direction,
+        split_size_arg,
+        workspace_root,
+        pane_cmd
+      ) ..
+      (run_options.debug == true and " \\; set-option -p remain-on-exit failed" or " \\; set-option -p remain-on-exit off")
 
   run_full_tmux_command({ split_cmd })
 end

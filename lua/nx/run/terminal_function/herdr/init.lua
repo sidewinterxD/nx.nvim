@@ -9,10 +9,10 @@ local function run_full_herdr_command(cmds)
   end
 end
 
-return function(final_cmd, keyword, node_version, split, debug)
+return function(final_cmd, run_options)
   local workspace_root = find_workspace_root()
-  local direction = split == "Vertical Split" and "right" or "down"
-  local split_size = split == "Vertical Split"
+  local direction = run_options.split == "Vertical Split" and "right" or "down"
+  local split_size = run_options.split == "Vertical Split"
       and nx_options.split_sizes.vertical
       or nx_options.split_sizes.horizontal
 
@@ -22,8 +22,8 @@ return function(final_cmd, keyword, node_version, split, debug)
 
   local script_steps = {}
 
-  if node_version then
-    table.insert(script_steps, string.format("nvm use %s", node_version))
+  if run_options.node_version then
+    table.insert(script_steps, string.format("nvm use %s", run_options.node_version))
   end
 
   table.insert(script_steps, 'clear')
@@ -47,7 +47,7 @@ return function(final_cmd, keyword, node_version, split, debug)
   if pane_id and pane_id ~= "" then
     split_size = tostring(split_size / 100)
 
-    local rename_cmd = string.format('herdr pane rename %s %q', pane_id, keyword)
+    local rename_cmd = string.format('herdr pane rename %s %q', pane_id, run_options.keyword)
     local run_cmd = string.format("herdr pane run %s '%s'", pane_id, keystroke_injection)
 
     run_full_herdr_command({ rename_cmd, run_cmd })

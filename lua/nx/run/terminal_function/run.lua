@@ -20,5 +20,9 @@ local function run_switch(cmd, run_options)
 end
 
 return function(cmd, run_options)
-  return get_split_options(cmd, run_options, run_switch)
+  if run_options.layout_type == "pane" then
+    return get_split_options(cmd, run_options, run_switch)
+  end
+
+  return run_switch(cmd, run_options)
 end

@@ -20,5 +20,11 @@ local function run_switch(cmd, run_options)
 end
 
 return function(cmd, run_options)
+  print(vim.inspect(run_options))
+
+  if run_options.layout_type == "window" then
+    return run_switch(cmd, run_options)
+  end
+
   return get_split_options(cmd, run_options, run_switch)
 end

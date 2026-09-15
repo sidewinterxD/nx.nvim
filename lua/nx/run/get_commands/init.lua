@@ -16,6 +16,7 @@ return function(opts, callback)
     node_version = nil,
     keyword = nil,
     cmd = nil,
+    args = nil,
     debug = false,
   }
 

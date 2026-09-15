@@ -41,6 +41,10 @@ return function(opts)
       current_items = { "Loading..." }
     end
 
+    table.sort(current_items, function(a, b)
+      return a < b
+    end)
+
     fzf_lua.fzf_exec(current_items, {
       prompt = prompt,
       fzf_opts = fzf_opts,

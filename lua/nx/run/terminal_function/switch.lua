@@ -8,8 +8,10 @@ return function(item, run_options)
   local nx_bin = get_nx_bin()
   local run_cmd = nx_bin .. " run " .. item
   local keyword = item:match("[%w_-]+:([%w_-]+)")
+  local project = item:match("([%w_-]+):[%w_-]+")
 
   run_options.keyword = keyword
+  run_options.project = project
   run_options.cmd = run_cmd
 
 

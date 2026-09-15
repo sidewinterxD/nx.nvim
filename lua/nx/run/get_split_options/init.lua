@@ -28,17 +28,6 @@ return function(cmd, run_options, callback)
         end
       },
       {
-        key = "ctrl-w",
-        desc = 'Run in window',
-        fn = function(selected)
-          if selected[1] then
-            split = ''
-            run_options.layout_type = "window"
-            callback(selected[1], run_options)
-          end
-        end
-      },
-      {
         key = 'Ctrl-r',
         desc = 'Default',
         fn = function()

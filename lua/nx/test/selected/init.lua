@@ -34,8 +34,9 @@ return function()
   for _, target in ipairs(target_list_cache) do
     if target.project == project_name and target.command:match("test") then
       return switch(target.command, {
-        args = string.format("--testNamePattern '%s' --testFile '%s'", table.concat(lines, " "), file_path) }
-      )
+        layout_type = "pane",
+        args = string.format("--testNamePattern '%s' --testFile '%s'", table.concat(lines, " "), file_path)
+      })
     end
   end
 end

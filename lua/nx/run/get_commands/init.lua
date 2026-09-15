@@ -11,6 +11,7 @@ return function(opts, callback)
   local run_local_project = opts.run_local or false
 
   local run_options = {
+    project = nil,
     layout_type = "pane",
     split_direction = nil,
     node_version = nil,

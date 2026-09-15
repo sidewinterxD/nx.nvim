@@ -71,7 +71,6 @@ function M.setup(opts)
     { "n", "<leader>nxjl", "<cmd>NxJumpLocalProjectJson<CR>", desc = "Open local project file" },
     { "n", "<leader>nxjP", "<cmd>NxPickJumpProjectJson<CR>",  desc = "Pick project file" },
     { "n", "<leader>nxg",  "<cmd>NxShowGraph<CR>",            desc = "Show Graph" },
-
     { "n", "<leader>nxtp", "<cmd>NxTestProject<CR>",          desc = "Run tests in project" },
     { "n", "<leader>nxtf", "<cmd>NxTestFile<CR>",             desc = "Run tests in current file" },
     { "v", "<leader>nxts", "<cmd>NxTestSelected<CR>",         desc = "Run selected test pattern in a file" },

@@ -17,6 +17,7 @@ return function(opts, callback)
     node_version = nil,
     keyword = nil,
     cmd = nil,
+    args = nil,
     debug = false,
   }
 
@@ -69,16 +70,6 @@ return function(opts, callback)
         end
       }
     },
-    {
-      key = "ctrl-p",
-      desc = 'Run in pane',
-      fn = function(selected)
-        if selected[1] then
-          run_options.layout_type = "pane"
-          callback(selected[1], run_options)
-        end
-      end
-    }
   })
 
   if not (target_list_cache and #target_list_cache > 0) then

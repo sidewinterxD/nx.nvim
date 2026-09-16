@@ -10,7 +10,6 @@ return function(final_cmd, run_options)
   local tmux_subcmd = "split-window"
   local layout_args = ""
 
-
   if layout_type == "pane" then
     local direction = run_options.split == "Vertical Split" and "-h" or "-v"
     local split_size = run_options.split == "Vertical Split"

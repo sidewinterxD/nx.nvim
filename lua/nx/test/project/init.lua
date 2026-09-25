@@ -1,11 +1,14 @@
 local find_project_root = require("nx.utils.find_project_root")
 local switch = require("nx.run.terminal_function.switch")
+local read_json = require("nx.utils.read_json")
 local target_list_cache = require("nx").target_list
 
 return function()
   local file_path = vim.api.nvim_buf_get_name(0)
   local project_root = find_project_root(file_path)
-  local project_name = project_root and vim.fs.basename(project_root) or nil
+  local project_config = project_root and read_json(project_root .. "/project.json") or
+      read_json(project_root .. "/package.json")
+  local project_name = project_config and project_config.name
 
   if not project_root then
     print("Project root not found for file: " .. file_path)

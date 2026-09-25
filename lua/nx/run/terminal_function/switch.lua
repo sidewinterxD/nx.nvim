@@ -14,7 +14,6 @@ return function(item, run_options)
   run_options.project = project
   run_options.cmd = run_cmd
 
-
   -- check if nvm should be used
   if nx_options.nvm.enabled == true then
     return get_node_version(run_cmd, run_options, run)

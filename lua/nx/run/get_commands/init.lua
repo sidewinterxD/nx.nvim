@@ -65,7 +65,7 @@ return function(opts, callback)
         end
       },
       {
-        key = "ctrl-s",
+        key = "ctrl-t",
         desc = 'split vertical',
         fn = function(selected)
           if selected[1] then
@@ -76,7 +76,7 @@ return function(opts, callback)
         end
       },
       {
-        key = "ctrl-t",
+        key = "ctrl-s",
         desc = 'split horizontal',
         fn = function(selected)
           if selected[1] then

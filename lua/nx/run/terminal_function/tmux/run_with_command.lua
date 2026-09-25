@@ -11,8 +11,8 @@ return function(final_cmd, run_options)
   local layout_args = ""
 
   if layout_type == "pane" then
-    local direction = run_options.split == "Vertical Split" and "-h" or "-v"
-    local split_size = run_options.split == "Vertical Split"
+    local direction = run_options.split == "Vertical" and "-h" or "-v"
+    local split_size = run_options.split == "Vertical"
         and nx_options.split_sizes.vertical
         or nx_options.split_sizes.horizontal
 
@@ -21,7 +21,7 @@ return function(final_cmd, run_options)
       split_size_arg = split_size_arg .. "%"
     end
 
-    layout_args = string.format("-d %s -f -l %q", direction, split_size_arg)
+    layout_args = string.format("-d %s -l %q -f", direction, split_size_arg)
   else
     tmux_subcmd = "new-window"
     local window_name = string.format("%s:%s", run_options.project, run_options.keyword)

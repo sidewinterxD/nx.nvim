@@ -11,6 +11,8 @@ A fun little sideproject I made due to working with nx and missing easy command 
 - 🔍 Fuzzy-find workflows via fzf-lua
 - 🕸️ Show Nx graph and project dependencies
 - 📂 Jump to workspace, project directories, and config files (`nx.json`, `project.json`)
+- 🧪 Run tests for the current project, the current file, or a selected test suite/case
+- 🎯 Supports targeted test execution based on the active buffer or selection
 
 ## Requirements
 

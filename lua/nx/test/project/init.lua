@@ -24,6 +24,7 @@ return function()
     if target.project == project_name and target.command:match("test") then
       return switch(target.command, {
         layout_type = "pane",
+        split = "Vertical",
         args = string.format("--all")
       })
     end

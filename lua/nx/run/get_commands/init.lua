@@ -51,20 +51,33 @@ return function(opts, callback)
     end,
     keybinds = {
       {
-        key = "Enter",
-        desc = 'Select',
-        fn = function(selected)
-          if selected[1] then
-            callback(selected[1], run_options)
-          end
-        end
-      },
-      {
         key = "ctrl-w",
         desc = 'Run in window',
         fn = function(selected)
           if selected[1] then
             run_options.layout_type = "window"
+            callback(selected[1], run_options)
+          end
+        end
+      },
+      {
+        key = "ctrl-s",
+        desc = 'split vertical',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = "pane"
+            run_options.split = "Vertical"
+            callback(selected[1], run_options)
+          end
+        end
+      },
+      {
+        key = "ctrl-t",
+        desc = 'split horizontal',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = "pane"
+            run_options.split = "Horizontal"
             callback(selected[1], run_options)
           end
         end

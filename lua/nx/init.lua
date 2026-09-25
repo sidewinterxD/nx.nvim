@@ -27,8 +27,8 @@ local default_options = {
     enabled = false,
   },
   split_sizes = {
-    horizontal = 12,
-    vertical = 50,
+    horizontal = 20,
+    vertical = 20,
   },
   shell = vim.o.shell,
 }

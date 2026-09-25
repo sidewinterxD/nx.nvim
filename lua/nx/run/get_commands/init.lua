@@ -1,6 +1,7 @@
 local find_workspace_root = require("nx.utils.find_workspace_root")
 local find_project_root = require("nx.utils.find_project_root")
 local collect_targets = require("nx.utils.collect_targets")
+local read_json = require("nx.utils.read_json")
 local target_list_cache = require("nx").target_list
 
 local popup = require("nx.popup.fzf_lua_popup")
@@ -37,7 +38,10 @@ return function(opts, callback)
       local open_file = vim.api.nvim_buf_get_name(0)
       local local_root = find_project_root(open_file)
       local include_all = (local_root == "." or local_root == "" or local_root == workspace_root)
-      local project_name = include_all and nil or vim.fs.basename(local_root)
+      local project_config = local_root and read_json(local_root .. "/project.json") or
+          read_json(local_root .. "/package.json")
+      local project_name = include_all and nil or project_config and project_config.name
+
 
       local out = {}
       for i = 1, #target_list_cache do

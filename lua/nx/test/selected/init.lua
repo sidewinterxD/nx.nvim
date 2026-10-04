@@ -1,7 +1,8 @@
 local find_project_root = require("nx.utils.find_project_root")
-local switch = require("nx.run.terminal_function.switch")
-local read_json = require("nx.utils.read_json")
+local switch            = require("nx.run.terminal_function.switch")
+local read_json         = require("nx.utils.read_json")
 local target_list_cache = require("nx").target_list
+local nx_options        = require("nx").options
 
 return function()
   local file_path = vim.api.nvim_buf_get_name(0)
@@ -37,8 +38,8 @@ return function()
   for _, target in ipairs(target_list_cache) do
     if target.project == project_name and target.command:match("test") then
       return switch(target.command, {
-        layout_type = "pane",
-        split = "Vertical",
+        layout_type = nx_options.layout_defaults.type,
+        split = nx_options.layout_defaults.split_direction,
         args = string.format("--testNamePattern '%s' --testFile '%s'", table.concat(lines, " "), file_path)
       })
     end

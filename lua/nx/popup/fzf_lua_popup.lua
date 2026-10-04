@@ -46,7 +46,10 @@ return function(opts)
         format_bind_key(bind.key),
         bind.desc
       )
-      footer_parts[#footer_parts + 1] = text
+
+      if bind.key ~= 'enter' then
+        footer_parts[#footer_parts + 1] = text
+      end
 
       if bind.fn then
         local fzf_key = bind.key:lower():gsub("<", ""):gsub(">", "")

@@ -1,8 +1,10 @@
 local find_workspace_root = require("nx.utils.find_workspace_root")
-local find_project_root = require("nx.utils.find_project_root")
-local collect_targets = require("nx.utils.collect_targets")
-local read_json = require("nx.utils.read_json")
-local target_list_cache = require("nx").target_list
+local find_project_root   = require("nx.utils.find_project_root")
+local collect_targets     = require("nx.utils.collect_targets")
+local read_json           = require("nx.utils.read_json")
+local target_list_cache   = require("nx").target_list
+local nx_options          = require("nx").options
+
 
 local popup = require("nx.popup.fzf_lua_popup")
 
@@ -13,8 +15,8 @@ return function(opts, callback)
 
   local run_options = {
     project = nil,
-    layout_type = "pane",
-    split_direction = nil,
+    layout_type = nx_options.layout_defaults.type or "pane",
+    split_direction = nx_options.layout_defaults.split_direction or "horizontal",
     node_version = nil,
     keyword = nil,
     cmd = nil,
@@ -55,6 +57,17 @@ return function(opts, callback)
     end,
     keybinds = {
       {
+        key = "enter",
+        desc = 'defaults',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = nx_options.layout_defaults.type
+            run_options.split = nx_options.layout_defaults.split_direction
+            callback(selected[1], run_options)
+          end
+        end
+      },
+      {
         key = "ctrl-w",
         desc = 'Run in window',
         fn = function(selected)
@@ -70,7 +83,7 @@ return function(opts, callback)
         fn = function(selected)
           if selected[1] then
             run_options.layout_type = "pane"
-            run_options.split = "Vertical"
+            run_options.split = "vertical"
             callback(selected[1], run_options)
           end
         end
@@ -81,7 +94,7 @@ return function(opts, callback)
         fn = function(selected)
           if selected[1] then
             run_options.layout_type = "pane"
-            run_options.split = "Horizontal"
+            run_options.split = "horizontal"
             callback(selected[1], run_options)
           end
         end

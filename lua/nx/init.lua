@@ -26,11 +26,16 @@ local default_options = {
   herdr = {
     enabled = false,
   },
-  split_sizes = {
-    horizontal = 20,
-    vertical = 20,
-  },
   shell = vim.o.shell,
+  layout_defaults = {
+    type = "pane",
+    split_direction = "horizontal",
+    auto_focus = false,
+    split_sizes = {
+      horizontal = 20,
+      vertical = 20,
+    },
+  }
 }
 
 M.options = vim.deepcopy(default_options)

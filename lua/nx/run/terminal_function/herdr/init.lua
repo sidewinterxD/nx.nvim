@@ -11,10 +11,10 @@ end
 
 return function(final_cmd, run_options)
   local workspace_root = find_workspace_root()
-  local direction = run_options.split == "Vertical Split" and "right" or "down"
-  local split_size = run_options.split == "Vertical Split"
-      and nx_options.split_sizes.vertical
-      or nx_options.split_sizes.horizontal
+  local direction = run_options.split == "vertical" and "right" or "down"
+  local split_size = run_options.split == "vertical"
+      and nx_options.layout_defaults.split_sizes.vertical
+      or nx_options.layout_defaults.split_sizes.horizontal
 
   -- convert to float. resizing parent pane.
   split_size = 100 - split_size

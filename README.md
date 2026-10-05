@@ -3,14 +3,21 @@
 A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands without leaving your editor.
 A fun little sideproject I made due to working with nx and missing easy command access.
 
+## Note from me
+
+All feedback is more than welcome! I can see that a few people are actually using my little sideproject. Which is super awesome. Happy coding and I hope my little plugin can make someones workflow a bit easier :)
+
 ## Features
 
-- 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
+- 🚀 Run Nx commands in a terminal (native Neovim terminal, tmux or herdr - if available)
+- 🪟 Run commands in panes or windows/tabs (tmux only, for now)
 - 🐞 Debug mode keeps the newly created pane open when the process exits - primarily in tmux
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
 - 🕸️ Show Nx graph and project dependencies
 - 📂 Jump to workspace, project directories, and config files (`nx.json`, `project.json`)
+- 🧪 Run tests for the current project, the current file, or a selected test suite/case
+- 🎯 Supports targeted test execution based on the active buffer or selection
 
 ## Requirements
 
@@ -54,14 +61,23 @@ require("nx").setup({
     tmux = {
         enabled = false      -- run commands in tmux pane if in a tmux session
     },
-    split_sizes = {          -- default split sizes. - NOTE herdr will convert to float. tmux will interperate as 20%
-        horizontal = 20,
-        vertical = 20,
-    },
     shell = nil,             -- defaults to vim.o.shell
+    layout_defaults = {
+        type = "pane",       -- default layout type: "pane" or "window"
+        split_direction = "horizontal", -- default split direction: "vertical" or "horizontal"
+        auto_focus = false, -- auto focus new pane or window if possible
+        split_sizes = {  -- default split sizes. - NOTE herdr will convert to float. tmux will interperate as 20%
+            horizontal = 20,
+            vertical = 20,
+        },
+    }
   }
 })
 ```
+
+### NOTE:
+
+V3: After adding layout_defaults, the previous split_direction option has moved into the layout_defaults object.
 
 ## Keymaps
 
@@ -78,6 +94,9 @@ require("nx").setup({
 | `<leader>nxjl` | `:NxJumpLocalProjectJson` | Open local project file             |
 | `<leader>nxjP` | `:NxPickJumpProjectJson`  | Pick project file                   |
 | `<leader>nxg`  | `:NxShowGraph`            | Show NX graph                       |
+| `<leader>nxtp` | `:NxTestProject`          | Run tests for current project       |
+| `<leader>nxtf` | `:NxTestFile`             | Run tests for current test file     |
+| `<leader>nxts` | `:NxTestSelected`         | Run current selected test - v mode  |
 
 ## Health Check
 

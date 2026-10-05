@@ -61,6 +61,18 @@ pcall(vim.api.nvim_create_user_command, 'NxShowGraph', function()
   require('nx.graph')()
 end, { desc = 'Show Graph' })
 
+pcall(vim.api.nvim_create_user_command, 'NxTestProject', function()
+  require('nx.test.project')()
+end, { desc = 'Run project tests' })
+
+pcall(vim.api.nvim_create_user_command, 'NxTestFile', function()
+  require('nx.test.file')()
+end, { desc = 'Run selected test pattern' })
+
+pcall(vim.api.nvim_create_user_command, 'NxTestSelected', function()
+  require('nx.test.selected')()
+end, { desc = 'Run selected test pattern in a file' })
+
 pcall(vim.api.nvim_create_user_command, 'NxGenerate', function()
   require('nx.generate')()
 end, { desc = 'Generate @nx/react' })

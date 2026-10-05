@@ -6,6 +6,7 @@ A fun little sideproject I made due to working with nx and missing easy command 
 ## Features
 
 - 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
+- 🪟 Run commands in panes or windows/tabs (tmux only)
 - 🐞 Debug mode keeps the newly created pane open when the process exits - primarily in tmux
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua
@@ -72,7 +73,7 @@ require("nx").setup({
 
 ### NOTE:
 
-After adding layout_defaults, the previous split_direction option has moved into the layout_defaults object.
+V3: After adding layout_defaults, the previous split_direction option has moved into the layout_defaults object.
 
 ## Keymaps
 

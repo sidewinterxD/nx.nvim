@@ -3,10 +3,14 @@
 A Neovim plugin for [Nx](https://nx.dev) monorepo workflows. Run Nx commands without leaving your editor.
 A fun little sideproject I made due to working with nx and missing easy command access.
 
+## Note from me
+
+All feedback is more than welcome! I can see that a few people are actually using my little sideproject. Which is super awesome. Happy coding and I hope my little plugin can make someones workflow a bit easier :)
+
 ## Features
 
-- 🚀 Run Nx commands in a terminal (native Neovim terminal or tmux if available)
-- 🪟 Run commands in panes or windows/tabs (tmux only)
+- 🚀 Run Nx commands in a terminal (native Neovim terminal, tmux or herdr - if available)
+- 🪟 Run commands in panes or windows/tabs (tmux only, for now)
 - 🐞 Debug mode keeps the newly created pane open when the process exits - primarily in tmux
 - 🔧 nvm support (including `fish.nvm` for fish shell users)
 - 🔍 Fuzzy-find workflows via fzf-lua

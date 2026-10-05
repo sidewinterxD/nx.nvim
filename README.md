@@ -77,7 +77,7 @@ require("nx").setup({
 
 ### NOTE:
 
-V3: After adding layout_defaults, the previous split_direction option has moved into the layout_defaults object.
+v0.3: After adding layout_defaults, the previous split_direction option has moved into the layout_defaults object.
 
 ## Keymaps
 

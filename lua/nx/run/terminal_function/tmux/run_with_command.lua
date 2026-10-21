@@ -10,23 +10,23 @@ return function(final_cmd, run_options)
   local tmux_subcmd = "split-window"
   local layout_args = ""
 
-
   if layout_type == "pane" then
-    local direction = run_options.split == "Vertical Split" and "-h" or "-v"
-    local split_size = run_options.split == "Vertical Split"
-        and nx_options.split_sizes.vertical
-        or nx_options.split_sizes.horizontal
+    local direction = run_options.split == "vertical" and "-h" or "-v"
+    local split_size = run_options.split == "vertical"
+        and nx_options.layout_defaults.split_sizes.vertical
+        or nx_options.layout_defaults.split_sizes.horizontal
 
     local split_size_arg = tostring(split_size)
+
     if split_size_arg:sub(-1) ~= "%" then
       split_size_arg = split_size_arg .. "%"
     end
 
-    layout_args = string.format("-d %s -f -l %q", direction, split_size_arg)
+    layout_args = string.format("%s -l %q -f", direction, split_size_arg)
   else
     tmux_subcmd = "new-window"
     local window_name = string.format("%s:%s", run_options.project, run_options.keyword)
-    layout_args = string.format("-d -n %q", window_name)
+    layout_args = string.format("-n %q", window_name)
   end
 
   if run_options.node_version then
@@ -36,6 +36,10 @@ return function(final_cmd, run_options)
   local pane_cmd = shell == "fish"
       and string.format('fish -c %q', final_cmd)
       or final_cmd
+
+  if nx_options.layout_defaults.auto_focus ~= true then
+    layout_args = layout_args .. " -d"
+  end
 
   local full_cmd = string.format(
         "tmux %s %s -P -F '#{pane_id}' -c %q %q",

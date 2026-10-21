@@ -42,7 +42,6 @@ return function(callback)
   local useful_test_options = {
     "watch",
     "watchAll",
-    "testNamePattern",
     "codeCoverage",
     "onlyChanged"
   }
@@ -52,8 +51,6 @@ return function(callback)
       table.insert(lines, string.format("%s", key))
     end
   end
-
-
 
   return popup({
     items = lines,

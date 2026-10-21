@@ -11,6 +11,11 @@ return function(cmd, run_options)
         run_options.cmd = cmd
       end
 
+      if run_options.args then
+        cmd = cmd .. " " .. run_options.args
+        run_options.cmd = cmd
+      end
+
       -- Update last_command with the full command including options
       last_command.cmd = cmd
       command_history[#command_history + 1] = run_options

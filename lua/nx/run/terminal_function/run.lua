@@ -1,14 +1,19 @@
-local tmux              = require("nx.run.terminal_function.tmux")
-local terminal          = require("nx.run.terminal_function.terminal")
-local herdr             = require("nx.run.terminal_function.herdr")
-local get_split_options = require("nx.run.get_split_options")
-local nx_options        = require("nx").options
-local last_command      = require("nx").last_command
+local tmux         = require("nx.run.terminal_function.tmux")
+local terminal     = require("nx.run.terminal_function.terminal")
+local herdr        = require("nx.run.terminal_function.herdr")
+local nx_options   = require("nx").options
+local last_command = require("nx").last_command
 
 local function run_switch(cmd, run_options)
   -- Update last_command with keyword and node_version
   last_command.node_version = run_options.node_version
   last_command.split = run_options.split
+  last_command.layout_type = run_options.layout_type
+  last_command.keyword = run_options.keyword
+  last_command.project = run_options.project
+  last_command.cmd = run_options.cmd
+  last_command.args = run_options.args
+  last_command.debug = run_options.debug
 
   if nx_options.tmux.enabled == true then
     return tmux(cmd, run_options)
@@ -20,9 +25,5 @@ local function run_switch(cmd, run_options)
 end
 
 return function(cmd, run_options)
-  if run_options.layout_type == "pane" then
-    return get_split_options(cmd, run_options, run_switch)
-  end
-
   return run_switch(cmd, run_options)
 end

@@ -1,7 +1,10 @@
 local find_workspace_root = require("nx.utils.find_workspace_root")
-local find_project_root = require("nx.utils.find_project_root")
-local collect_targets = require("nx.utils.collect_targets")
-local target_list_cache = require("nx").target_list
+local find_project_root   = require("nx.utils.find_project_root")
+local collect_targets     = require("nx.utils.collect_targets")
+local read_json           = require("nx.utils.read_json")
+local target_list_cache   = require("nx").target_list
+local nx_options          = require("nx").options
+
 
 local popup = require("nx.popup.fzf_lua_popup")
 
@@ -12,11 +15,12 @@ return function(opts, callback)
 
   local run_options = {
     project = nil,
-    layout_type = "pane",
-    split_direction = nil,
+    layout_type = nx_options.layout_defaults.type or "pane",
+    split_direction = nx_options.layout_defaults.split_direction or "horizontal",
     node_version = nil,
     keyword = nil,
     cmd = nil,
+    args = nil,
     debug = false,
   }
 
@@ -36,7 +40,10 @@ return function(opts, callback)
       local open_file = vim.api.nvim_buf_get_name(0)
       local local_root = find_project_root(open_file)
       local include_all = (local_root == "." or local_root == "" or local_root == workspace_root)
-      local project_name = include_all and nil or vim.fs.basename(local_root)
+      local project_config = local_root and read_json(local_root .. "/project.json") or
+          read_json(local_root .. "/package.json")
+      local project_name = include_all and nil or project_config and project_config.name
+
 
       local out = {}
       for i = 1, #target_list_cache do
@@ -50,10 +57,12 @@ return function(opts, callback)
     end,
     keybinds = {
       {
-        key = "Enter",
-        desc = 'Select',
+        key = "enter",
+        desc = 'defaults',
         fn = function(selected)
           if selected[1] then
+            run_options.layout_type = nx_options.layout_defaults.type
+            run_options.split = nx_options.layout_defaults.split_direction
             callback(selected[1], run_options)
           end
         end
@@ -67,18 +76,30 @@ return function(opts, callback)
             callback(selected[1], run_options)
           end
         end
+      },
+      {
+        key = "ctrl-t",
+        desc = 'split vertical',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = "pane"
+            run_options.split = "vertical"
+            callback(selected[1], run_options)
+          end
+        end
+      },
+      {
+        key = "ctrl-s",
+        desc = 'split horizontal',
+        fn = function(selected)
+          if selected[1] then
+            run_options.layout_type = "pane"
+            run_options.split = "horizontal"
+            callback(selected[1], run_options)
+          end
+        end
       }
     },
-    {
-      key = "ctrl-p",
-      desc = 'Run in pane',
-      fn = function(selected)
-        if selected[1] then
-          run_options.layout_type = "pane"
-          callback(selected[1], run_options)
-        end
-      end
-    }
   })
 
   if not (target_list_cache and #target_list_cache > 0) then

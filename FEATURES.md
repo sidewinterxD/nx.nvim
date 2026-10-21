@@ -35,8 +35,8 @@
 
 ## Workspace Utilities
 
-- [ ] show projects in workspace
-- [ ] show targets in project
+- [x] show projects in workspace
+- [x] show targets in project
 - [ ] Show affected projects (based on current git changes)
 - [ ] Browse and filter projects by Nx tags
 - [ ] View task pipeline / `dependsOn` chain for a target
@@ -46,7 +46,7 @@
 ## Editor Integration
 
 - [ ] Pipe `nx lint` output into quickfix list
-- [ ] Run tests for current buffer's project
+- [x] Run tests for current buffer's project
 - [ ] Statusline component showing current Nx project
 
 ## Diagnostics

@@ -1,3 +1,23 @@
+local function format_bind_key(key)
+  if not key or key == "" then
+    return key
+  end
+
+  local k = key:lower()
+  k = k:gsub("^ctrl[%+%-_]", "<c-")
+  k = k:gsub("^control[%+%-_]", "<c-")
+  k = k:gsub("^alt[%+%-_]", "<m-")
+  k = k:gsub("^meta[%+%-_]", "<m-")
+  k = k:gsub("^shift[%+%-_]", "<s-")
+  k = k:gsub("[%+%-_]", "-")
+
+  if k:match("^<") and not k:match(">$") then
+    k = k .. ">"
+  end
+
+  return k
+end
+
 return function(opts)
   local fzf_lua = require("fzf-lua")
 
@@ -21,8 +41,15 @@ return function(opts)
     local footer_parts = {}
 
     for _, bind in ipairs(opts.keybinds) do
-      local text = string.format("\x1b[1;38;2;203;166;247m%s\x1b[0m %s", bind.key, bind.desc)
-      footer_parts[#footer_parts + 1] = text
+      local text = string.format(
+        "\x1b[1;38;2;203;166;247m%s\x1b[0m %s",
+        format_bind_key(bind.key),
+        bind.desc
+      )
+
+      if bind.key ~= 'enter' then
+        footer_parts[#footer_parts + 1] = text
+      end
 
       if bind.fn then
         local fzf_key = bind.key:lower():gsub("<", ""):gsub(">", "")
